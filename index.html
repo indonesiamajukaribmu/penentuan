@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Al-Hilāl · Hisab, Rukyat, Doa, Zakat & Imsakiyah</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Outfit:wght@200;300;400;500;600;700;800;900&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root{--bg-deep:#070a14;--bg:#0c1220;--bg-card:#131b2e;--bg-card-2:#1a2238;--gold:#d4af37;--gold-light:#f4d160;--gold-dark:#a8851f;--emerald:#2d8659;--emerald-light:#4cb888;--cream:#f5e6c8;--muted:#8b9bb4;--accent:#e8923c;--border:rgba(212,175,55,0.18);--danger:#c44545;--sidebar-w:260px;}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:'Outfit',sans-serif;background:var(--bg-deep);color:var(--cream);margin:0;overflow-x:hidden;}
+  .font-arabic{font-family:'Amiri',serif}.font-kufi{font-family:'Reem Kufi',sans-serif}
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse at 20% 10%,rgba(45,134,89,0.08),transparent 50%),radial-gradient(ellipse at 80% 60%,rgba(212,175,55,0.06),transparent 50%);}
+  .star{position:absolute;background:white;border-radius:50%;animation:twinkle 3s ease-in-out infinite;}
+  @keyframes twinkle{0%,100%{opacity:0.2;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}
+  .gradient-gold{background:linear-gradient(135deg,#f4d160,#d4af37,#a8851f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .gradient-emerald{background:linear-gradient(135deg,#4cb888,#2d8659);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .card{background:linear-gradient(145deg,var(--bg-card),var(--bg-card-2));border:1px solid var(--border);border-radius:20px;position:relative;overflow:hidden;transition:all 0.4s;}
+  .card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,0.4);box-shadow:0 20px 40px rgba(0,0,0,0.4),0 0 60px rgba(212,175,55,0.1);}
+  .pill{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:50px;font-size:12px;font-weight:600;border:1px solid;}
+  .pill-gold{color:var(--gold-light);border-color:rgba(212,175,55,0.4);background:rgba(212,175,55,0.08)}
+  .pill-emerald{color:var(--emerald-light);border-color:rgba(76,184,136,0.4);background:rgba(76,184,136,0.08)}
+  .pill-danger{color:#ff9a9a;border-color:rgba(196,69,69,0.4);background:rgba(196,69,69,0.08)}
+  .pill-live{color:#ff4444;border-color:rgba(255,68,68,0.5);background:rgba(255,68,68,0.1);animation:livePulse 1.5s ease-in-out infinite;}
+  @keyframes livePulse{0%,100%{box-shadow:0 0 0 0 rgba(255,68,68,0.4)}50%{box-shadow:0 0 0 6px rgba(255,68,68,0)}}
+  .title-deco::after{content:'';display:block;width:80px;height:3px;margin-top:14px;background:linear-gradient(90deg,var(--gold),transparent);border-radius:2px;}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s,transform 0.8s;}.reveal.visible{opacity:1;transform:translateY(0)}
+  .app-layout{display:flex;min-height:100vh;}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar-w);background:linear-gradient(180deg,#0a0e1a,#0c1220);border-right:1px solid var(--border);z-index:50;display:flex;flex-direction:column;transition:transform 0.3s ease;}
+  .sidebar-header{padding:20px;border-bottom:1px solid var(--border);}
+  .sidebar-nav{flex:1;padding:16px 12px;overflow-y:auto;}
+  .nav-item{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:12px;color:var(--muted);font-size:14px;font-weight:500;cursor:pointer;transition:all 0.25s;margin-bottom:4px;text-decoration:none;}
+  .nav-item:hover{background:rgba(212,175,55,0.08);color:var(--gold-light);}
+  .nav-item.active{background:linear-gradient(135deg,rgba(212,175,55,0.2),rgba(168,133,31,0.1));color:var(--gold-light);border:1px solid rgba(212,175,55,0.3);box-shadow:0 4px 14px rgba(212,175,55,0.15);}
+  .nav-item i{width:20px;text-align:center;font-size:15px;}
+  .nav-item .nav-badge{margin-left:auto;font-size:9px;padding:2px 6px;border-radius:50px;background:rgba(255,68,68,0.2);color:#ff6b6b;font-weight:700;}
+  .sidebar-footer{padding:16px;border-top:1px solid var(--border);}
+  .main-content{margin-left:var(--sidebar-w);flex:1;min-height:100vh;position:relative;}
+  .top-bar{position:sticky;top:0;z-index:40;backdrop-filter:blur(20px) saturate(180%);background:rgba(7,10,20,0.8);border-bottom:1px solid var(--border);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;}
+  .content-area{padding:24px;}
+  @media(max-width:1024px){.sidebar{transform:translateX(-100%);}.sidebar.open{transform:translateX(0);}.main-content{margin-left:0;}.mobile-toggle{display:flex !important;}}
+  .mobile-toggle{display:none;}
+  .hilal-viz-wrapper{position:relative;border-radius:24px;overflow:hidden;border:1px solid var(--border);background:#0a0e1a;box-shadow:0 25px 60px rgba(0,0,0,0.5);}
+  .hilal-data-panel{background:linear-gradient(145deg,var(--bg-card),var(--bg-card-2));border:1px solid var(--border);border-radius:16px;padding:20px;}
+  .data-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px dashed rgba(212,175,55,0.15);}.data-row:last-child{border-bottom:none;}
+  .data-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+  .data-value{font-size:14px;font-weight:800;color:var(--gold-light);font-variant-numeric:tabular-nums;}
+  .moon-pulse{animation:moonPulse 3s ease-in-out infinite;transform-origin:center;transition:transform 0.5s ease;}
+  @keyframes moonPulse{0%,100%{opacity:0.9;filter:drop-shadow(0 0 8px rgba(244,209,96,0.6))}50%{opacity:1;filter:drop-shadow(0 0 16px rgba(244,209,96,0.9))}}
+  .sun-glow{animation:sunGlow 4s ease-in-out infinite;}@keyframes sunGlow{0%,100%{opacity:0.5}50%{opacity:0.8}}
+  .twinkle-star{animation:twStar 2s ease-in-out infinite;}@keyframes twStar{0%,100%{opacity:0.3}50%{opacity:1}}
+  .dynamic-line{transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);}.dynamic-text{transition:all 0.5s cubic-bezier(0.34,1.56,0.64,1);}
+  .compass-container{position:relative;width:260px;height:260px;margin:0 auto;}.compass-svg{width:100%;height:100%;}
+  .compass-needle-group{transform-origin:130px 130px;transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1);}
+  .degree-display{text-align:center;margin-top:12px;padding:10px;border-radius:12px;background:rgba(0,0,0,0.3);border:1px solid var(--border);}
+  .degree-num{font-size:36px;font-weight:900;background:linear-gradient(135deg,#f4d160,#d4af37,#a8851f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-variant-numeric:tabular-nums;line-height:1;}
+  .degree-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:4px;font-weight:700;}
+  .direction-pad{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px;}
+  .dir-btn{padding:10px 4px;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);color:var(--muted);font-size:11px;font-weight:700;cursor:pointer;transition:all 0.25s;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;}
+  .dir-btn:hover{background:rgba(212,175,55,0.1);color:var(--gold-light);border-color:rgba(212,175,55,0.4);transform:translateY(-1px);}
+  .dir-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--bg-deep);border-color:var(--gold);box-shadow:0 4px 14px rgba(212,175,55,0.4);}
+  .dir-btn .dir-deg{font-size:9px;opacity:0.8;}
+  .ar-toggle-btn{width:100%;padding:16px;border-radius:14px;font-weight:800;font-size:14px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;justify-content:center;gap:10px;border:none;margin-bottom:10px;}
+  .ar-toggle-off{background:linear-gradient(135deg,#2d8659,#1a5a3e);color:#a8e6c1;border:2px solid rgba(76,184,136,0.5);box-shadow:0 6px 20px rgba(45,134,89,0.3);}
+  .ar-toggle-on{background:linear-gradient(135deg,#c44545,#8b2c2c);color:#fff;border:2px solid rgba(255,68,68,0.5);box-shadow:0 6px 20px rgba(196,69,69,0.4);animation:livePulse 1.5s ease-in-out infinite;}
+  .ar-status-box{font-size:11px;text-align:center;padding:8px;border-radius:10px;margin-bottom:10px;background:rgba(0,0,0,0.3);border:1px solid var(--border);transition:all 0.3s;}
+  .ar-status-box.active{background:rgba(76,184,136,0.1);border-color:rgba(76,184,136,0.3);color:#4cb888;}
+  .ar-status-box.inactive{color:var(--muted);}
+  .camera-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0;transition:opacity 0.5s;}.camera-video.active{opacity:0.35;}
+  .live-card{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:linear-gradient(145deg,var(--bg-card),var(--bg-card-2));transition:all 0.3s;cursor:pointer;}
+  .live-card:hover{transform:translateY(-3px);border-color:rgba(255,68,68,0.4);box-shadow:0 15px 35px rgba(0,0,0,0.3),0 0 30px rgba(255,68,68,0.15);}
+  .live-card-thumb{position:relative;height:110px;background:linear-gradient(135deg,#1a2850,#0a0e1a);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .live-badge{position:absolute;top:10px;left:10px;display:flex;align-items:center;gap:4px;padding:3px 8px;border-radius:6px;background:rgba(255,68,68,0.9);color:white;font-size:9px;font-weight:800;z-index:2;}
+  .live-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:white;animation:liveBlink 1s ease-in-out infinite;}
+  @keyframes liveBlink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .live-card-info{padding:12px;}.live-channel-name{font-size:11px;color:var(--gold-light);font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+  .streaming-iframe-wrapper{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--border);background:#000;aspect-ratio:16/9;}.streaming-iframe-wrapper iframe{width:100%;height:100%;border:0;}
+  .net-dot{width:10px;height:10px;border-radius:50%;position:relative;flex-shrink:0;}
+  .net-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:inherit;opacity:0.5;animation:netPulse 2s ease-in-out infinite;}
+  @keyframes netPulse{0%,100%{transform:scale(1);opacity:0.5}50%{transform:scale(1.8);opacity:0}}
+  .net-dot.green{background:#22c55e;box-shadow:0 0 12px #22c55e;}.net-dot.yellow{background:#eab308;box-shadow:0 0 12px #eab308;}.net-dot.red{background:#ef4444;box-shadow:0 0 12px #ef4444;animation:netBlink 1s ease-in-out infinite;}
+  @keyframes netBlink{0%,100%{opacity:1}50%{opacity:0.4}}
+  .cal-day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:13px;font-weight:500;}
+  .cal-day.empty{opacity:0}.cal-day.holiday{background:rgba(196,69,69,0.25);border:1px solid rgba(196,69,69,0.5);color:#ffb8b8;font-weight:700;}
+  .cal-day.islamic{background:rgba(45,134,89,0.3);border:1px solid rgba(76,184,136,0.6);color:#a8e6c1;font-weight:700;}
+  .cal-day.fasting{background:rgba(58,160,160,0.2);border:1px solid rgba(58,160,160,0.4);color:#a0d0d0;}.cal-day.haram{background:rgba(196,69,69,0.25);border:1px solid rgba(196,69,69,0.5);color:#ffb8b8;font-weight:700;text-decoration:line-through;}
+  .cal-day.special{background:rgba(232,146,60,0.15);border:1px solid rgba(232,146,60,0.3);color:#ffc99a;}
+  .imsakiyah-wrapper{position:relative;border-radius:24px;overflow:hidden;background:linear-gradient(180deg,#0a0e1a,#131b2e,#1a2238);border:2px solid rgba(212,175,55,0.3);box-shadow:0 25px 60px rgba(0,0,0,0.5);}
+  .imsakiyah-pattern{position:absolute;inset:0;pointer-events:none;opacity:0.06;background-image:radial-gradient(circle at 20% 20%,var(--gold) 1px,transparent 1px),radial-gradient(circle at 80% 80%,var(--gold) 1px,transparent 1px);background-size:40px 40px;}
+  .imsakiyah-header{position:relative;padding:30px 24px;text-align:center;background:linear-gradient(135deg,rgba(212,175,55,0.1),rgba(168,133,31,0.05));border-bottom:2px solid rgba(212,175,55,0.3);}
+  .imsakiyah-title{font-size:24px;font-weight:900;background:linear-gradient(135deg,#f4d160,#d4af37,#a8851f);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  .imsakiyah-subtitle{font-size:13px;color:var(--gold-light);margin-top:6px;font-weight:600;}.imsakiyah-arabic{font-family:'Amiri',serif;font-size:22px;color:var(--gold-light);margin-top:8px;}
+  .city-btn{padding:8px 16px;border-radius:50px;font-size:12px;font-weight:600;cursor:pointer;transition:all 0.25s;border:1px solid var(--border);background:var(--bg-card);color:var(--muted);}
+  .city-btn:hover{background:rgba(212,175,55,0.1);color:var(--gold-light);}.city-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--bg-deep);border-color:var(--gold);}
+  .imsakiyah-table{width:100%;border-collapse:collapse;font-size:12px;}
+  .imsakiyah-table th{padding:10px 6px;text-align:center;font-size:11px;font-weight:700;text-transform:uppercase;color:var(--bg-deep);background:linear-gradient(135deg,var(--gold),var(--gold-dark));position:sticky;top:0;z-index:5;}
+  .imsakiyah-table td{padding:8px 6px;text-align:center;border-bottom:1px solid rgba(212,175,55,0.1);font-variant-numeric:tabular-nums;}
+  .imsakiyah-table .day-num{font-weight:700;color:var(--gold-light);}.imsakiyah-table .hijri-date{color:var(--emerald-light);font-size:11px;}
+  .imsakiyah-table .time-imsak{color:#a0d0d0;font-weight:600;}.imsakiyah-table .time-subuh{color:#4cb888;font-weight:600;}.imsakiyah-table .time-dzuhur{color:#f4d160;font-weight:600;}.imsakiyah-table .time-ashar{color:#e8923c;font-weight:600;}.imsakiyah-table .time-maghrib{color:#ff6b6b;font-weight:700;}.imsakiyah-table .time-isya{color:#9b59b6;font-weight:600;}
+  .imsakiyah-btn{padding:12px 24px;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer;display:flex;align-items:center;gap:8px;border:none;}.imsakiyah-btn-print{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--bg-deep);box-shadow:0 8px 20px rgba(212,175,55,0.3);}.imsakiyah-btn-pdf{background:linear-gradient(135deg,#c44545,#8b2c2c);color:#fff;box-shadow:0 8px 20px rgba(196,69,69,0.3);border:1px solid rgba(196,69,69,0.4);}
+  .book-cover{height:160px;border-radius:12px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}.book-cover::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,rgba(255,255,255,0.1),transparent 70%);}.book-icon{font-size:48px;z-index:2;position:relative;}
+  .book-title{font-size:14px;font-weight:700;margin-top:12px;}.book-desc{font-size:11px;color:var(--muted);margin-top:4px;}
+  
+  /* DOA & ZAKAT STYLES */
+  .doa-card{background:rgba(0,0,0,0.2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:12px;}
+  .doa-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--bg-deep);font-weight:800;font-size:13px;margin-bottom:8px;}
+  .doa-title{font-size:14px;font-weight:700;color:var(--gold-light);margin-bottom:8px;}
+  .doa-arabic{font-family:'Amiri',serif;font-size:20px;color:#f5e6c8;line-height:2;text-align:right;margin:10px 0;padding:12px;background:rgba(212,175,55,0.05);border-radius:8px;border-right:3px solid var(--gold);}
+  .doa-latin{font-size:13px;color:var(--emerald-light);font-style:italic;margin:8px 0;line-height:1.6;}
+  .doa-translation{font-size:13px;color:var(--cream);margin:8px 0;line-height:1.6;}
+  .doa-translation strong{color:var(--gold-light);}
+  
+  /* ZAKAT CALCULATOR */
+  .zakat-tab{padding:10px 20px;border-radius:12px;font-weight:700;font-size:13px;cursor:pointer;transition:all 0.25s;border:1px solid var(--border);background:var(--bg-card);color:var(--muted);}
+  .zakat-tab.active{background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:var(--bg-deep);border-color:var(--gold);box-shadow:0 4px 14px rgba(212,175,55,0.3);}
+  .zakat-input-group{margin-bottom:14px;}
+  .zakat-input-label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:6px;display:block;}
+  .zakat-input{width:100%;padding:12px 14px;border-radius:10px;background:rgba(0,0,0,0.3);border:1px solid var(--border);color:var(--cream);font-size:14px;font-weight:600;outline:none;transition:all 0.2s;}
+  .zakat-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,175,55,0.1);}
+  .zakat-select{width:100%;padding:12px 14px;border-radius:10px;background:rgba(0,0,0,0.3);border:1px solid var(--border);color:var(--cream);font-size:14px;cursor:pointer;outline:none;}
+  .zakat-result{background:linear-gradient(135deg,rgba(76,184,136,0.1),rgba(45,134,89,0.05));border:2px solid rgba(76,184,136,0.3);border-radius:16px;padding:24px;text-align:center;margin-top:16px;}
+  .zakat-result-num{font-size:36px;font-weight:900;color:#4cb888;font-variant-numeric:tabular-nums;line-height:1;}
+  .zakat-result-label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:2px;margin-top:8px;font-weight:700;}
+  .zakat-detail{font-size:13px;color:var(--cream);margin-top:12px;line-height:1.6;}
+  .zakat-info{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5;}
+  
+  .haram-card{position:relative;border-radius:20px;overflow:hidden;border:1px solid var(--border);background:linear-gradient(145deg,var(--bg-card),var(--bg-card-2));transition:all 0.3s;}
+  .haram-card:hover{transform:translateY(-4px);border-color:rgba(212,175,55,0.4);}
+  .haram-video{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;}.haram-video iframe{width:100%;height:100%;border:0;}
+  .haram-info{padding:16px;}.haram-name{font-size:18px;font-weight:800;}.haram-arabic{font-family:'Amiri',serif;font-size:20px;color:var(--gold-light);}.haram-desc{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);backdrop-filter:blur(8px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px;}.modal-overlay.active{display:flex;}
+  .modal-content{background:#fff;color:#1a1a1a;border-radius:16px;width:100%;max-width:900px;max-height:95vh;overflow:auto;box-shadow:0 25px 60px rgba(0,0,0,0.5);}
+  .modal-header{padding:20px 30px;border-bottom:1px solid #e5e5e5;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:#fff;z-index:10;}
+  .modal-body{padding:30px;background:#f8f8f8;max-height:80vh;overflow-y:auto;}
+  .print-calendar-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;background:#fff;padding:20px;}@media(max-width:900px){.print-calendar-grid{grid-template-columns:repeat(2,1fr);}}
+  .print-month-card{background:#fff;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,0.06);}.print-month-header{text-align:center;font-weight:800;font-size:14px;padding:10px 4px;color:#fff;letter-spacing:1px;}
+  .print-cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:8px;background:#fafafa;}
+  .print-cal-head{text-align:center;font-size:9px;font-weight:700;padding:3px 0;color:#555;background:#eee;border-radius:3px;}
+  .print-cal-cell{text-align:center;font-size:11px;padding:6px 0;background:#fff;border-radius:4px;min-height:28px;font-weight:500;color:#333;}
+  .pmc-0 .print-month-header{background:linear-gradient(135deg,#e74c3c,#c0392b);}.pmc-1 .print-month-header{background:linear-gradient(135deg,#e67e22,#d35400);}.pmc-2 .print-month-header{background:linear-gradient(135deg,#f39c12,#e67e22);}.pmc-3 .print-month-header{background:linear-gradient(135deg,#27ae60,#16a085);}.pmc-4 .print-month-header{background:linear-gradient(135deg,#16a085,#1abc9c);}.pmc-5 .print-month-header{background:linear-gradient(135deg,#2980b9,#3498db);}.pmc-6 .print-month-header{background:linear-gradient(135deg,#8e44ad,#9b59b6);}.pmc-7 .print-month-header{background:linear-gradient(135deg,#c0392b,#e74c3c);}.pmc-8 .print-month-header{background:linear-gradient(135deg,#d35400,#f39c12);}.pmc-9 .print-month-header{background:linear-gradient(135deg,#16a085,#27ae60);}.pmc-10 .print-month-header{background:linear-gradient(135deg,#d35400,#e67e22);}.pmc-11 .print-month-header{background:linear-gradient(135deg,#c0392b,#8e44ad);}
+  @media print{body * {visibility:hidden;}#imsakiyahPrint, #imsakiyahPrint * {visibility:visible;}#imsakiyahPrint{position:absolute;left:0;top:0;width:100%;background:#fff !important;}@page{size:A4 portrait;margin:10mm;}}
+</style>
+</head>
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="app-layout">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark));box-shadow:0 0 20px rgba(212,175,55,0.4)">
+          <i class="fa-solid fa-moon text-slate-900"></i>
+        </div>
+        <div><div class="font-kufi font-bold text-lg leading-none gradient-gold">Al-Hilāl</div><div class="text-[10px] text-slate-400 mt-1">Hisab, Doa, Zakat & Imsakiyah</div></div>
+      </div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="#visualisasi-hilal" class="nav-item active" onclick="setActiveNav(this)"><i class="fa-solid fa-compass"></i><span>Visualisasi Hilal</span><span class="nav-badge">AR</span></a>
+      <a href="#kumpulan-doa" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-hands-praying"></i><span>20 Kumpulan Doa</span><span class="nav-badge">20</span></a>
+      <a href="#kalkulator-zakat" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-calculator"></i><span>Kalkulator Zakat</span><span class="nav-badge">NEW</span></a>
+      <a href="#imsakiyah" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-clock"></i><span>Jadwal Imsakiyah</span></a>
+      <a href="#panduan-puasa" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-moon"></i><span>Panduan Puasa</span></a>
+      <a href="#makkah-madinah" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-kaaba"></i><span>Makkah & Madinah</span><span class="nav-badge">LIVE</span></a>
+      <a href="#live-tv" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-tv"></i><span>Live TV</span></a>
+      <a href="#kalender-hijriah" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-calendar-days"></i><span>Kalender Hijriah</span></a>
+      <a href="#kalender-masehi" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-flag"></i><span>Kalender Masehi</span></a>
+      <a href="#unduh" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-download"></i><span>Unduh & Cetak</span></a>
+      <div class="my-3 px-3 text-[10px] text-slate-500 font-bold uppercase tracking-wider">Puasa</div>
+      <a href="#puasa-sunnah" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-utensils"></i><span>Puasa Sunnah</span></a>
+      <a href="#puasa-haram" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-ban"></i><span>Puasa Haram</span></a>
+      <a href="#hari-nasional" class="nav-item" onclick="setActiveNav(this)"><i class="fa-solid fa-star"></i><span>Hari Nasional</span></a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="flex items-center gap-2 p-3 rounded-xl" style="background:rgba(0,0,0,0.3);border:1px solid var(--border)">
+        <div class="net-dot yellow" id="netDot"></div>
+        <div class="flex-1"><div class="text-[11px] font-bold text-yellow-400" id="netStatus">Memeriksa...</div><div class="text-[10px] text-slate-400" id="netSpeed">-- KB/s</div></div>
+        <i class="fa-solid fa-wifi text-slate-500 text-xs"></i>
+      </div>
+    </div>
+  </aside>
+  
+  <main class="main-content">
+    <div class="top-bar">
+      <div class="flex items-center gap-3">
+        <button class="mobile-toggle w-9 h-9 rounded-lg items-center justify-center text-yellow-300" style="background:var(--bg-card);border:1px solid var(--border)" onclick="toggleSidebar()"><i class="fa-solid fa-bars"></i></button>
+        <div><h1 class="text-lg font-bold" id="pageTitle">Visualisasi Hilal AR</h1><p class="text-xs text-slate-400">Doa · Zakat · Imsakiyah · AR</p></div>
+      </div>
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block"><div class="text-sm font-bold text-yellow-300" id="currentTime">--:--:--</div><div class="text-[10px] text-slate-400" id="currentDate">--</div></div>
+        <div class="w-9 h-9 rounded-full flex items-center justify-center" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark))"><i class="fa-solid fa-user text-slate-900 text-sm"></i></div>
+      </div>
+    </div>
+    
+    <div class="content-area">
+      
+      <!-- VISUALISASI HILAL -->
+      <section id="visualisasi-hilal" class="mb-12">
+        <div class="reveal text-center mb-8">
+          <div class="pill pill-gold mb-4"><i class="fa-solid fa-compass text-xs"></i> VISUALISASI HILAL AR</div>
+          <h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Posisi <span class="gradient-gold">Hilal</span> & Kamera AR</h2>
+          <p class="text-slate-400 max-w-2xl mx-auto mt-3">Klik ON → kamera & kompas otomatis aktif. Klik OFF → berhenti.</p>
+        </div>
+        <div class="reveal grid lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 hilal-viz-wrapper">
+            <video id="cameraVideo" class="camera-video" autoplay playsinline muted></video>
+            <svg class="w-full relative z-10" viewBox="0 0 800 500" id="hilalSvg">
+              <defs><linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#0a1530"/><stop offset="25%" stop-color="#1a2850"/><stop offset="50%" stop-color="#3a4a6a"/><stop offset="70%" stop-color="#c44545"/><stop offset="85%" stop-color="#e8923c"/><stop offset="100%" stop-color="#f4d160"/></linearGradient><radialGradient id="sunGrad"><stop offset="0%" stop-color="#fff"/><stop offset="35%" stop-color="#f4d160"/><stop offset="75%" stop-color="#e8923c"/><stop offset="100%" stop-color="#c44545"/></radialGradient><radialGradient id="moonGrad"><stop offset="0%" stop-color="#f4d160"/><stop offset="60%" stop-color="#d4af37"/><stop offset="100%" stop-color="#8b6914"/></radialGradient></defs>
+              <rect width="800" height="380" fill="url(#skyGrad)" opacity="0.7"/><rect y="380" width="800" height="120" fill="#070a14" opacity="0.7"/>
+              <g><circle cx="100" cy="50" r="1.5" fill="white" class="twinkle-star"/><circle cx="200" cy="80" r="1" fill="white" class="twinkle-star" style="animation-delay:0.3s"/><circle cx="300" cy="40" r="1.5" fill="white" class="twinkle-star" style="animation-delay:0.6s"/><circle cx="600" cy="30" r="1.5" fill="white" class="twinkle-star" style="animation-delay:1.2s"/><circle cx="700" cy="70" r="1" fill="white" class="twinkle-star" style="animation-delay:1.5s"/></g>
+              <line x1="0" y1="340" x2="800" y2="340" stroke="rgba(212,175,55,0.15)" stroke-width="1" stroke-dasharray="4,4"/><text x="10" y="337" fill="rgba(212,175,55,0.5)" font-size="9">5°</text>
+              <line x1="0" y1="300" x2="800" y2="300" stroke="rgba(212,175,55,0.15)" stroke-width="1" stroke-dasharray="4,4"/><text x="10" y="297" fill="rgba(212,175,55,0.5)" font-size="9">10°</text>
+              <line x1="0" y1="260" x2="800" y2="260" stroke="rgba(212,175,55,0.15)" stroke-width="1" stroke-dasharray="4,4"/><text x="10" y="257" fill="rgba(212,175,55,0.5)" font-size="9">15°</text>
+              <line x1="0" y1="220" x2="800" y2="220" stroke="rgba(212,175,55,0.1)" stroke-width="1" stroke-dasharray="4,4"/><text x="10" y="217" fill="rgba(212,175,55,0.5)" font-size="9">20°</text>
+              <line x1="0" y1="380" x2="800" y2="380" stroke="#d4af37" stroke-width="2"/><text x="10" y="375" fill="#d4af37" font-size="9" font-weight="700">UFUK (0°)</text>
+              <circle cx="400" cy="380" r="50" fill="#e8923c" opacity="0.3" class="sun-glow"/><circle cx="400" cy="380" r="32" fill="url(#sunGrad)"/><text x="400" y="430" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">MATAHARI</text>
+              <line class="dynamic-line" id="altLine" x1="550" y1="320" x2="550" y2="380" stroke="#4cb888" stroke-width="2.5" stroke-dasharray="5,3"/>
+              <path class="dynamic-line" id="altArc" d="M 550 380 A 60 60 0 0 0 590 326" fill="none" stroke="#4cb888" stroke-width="1.5" opacity="0.6"/>
+              <text class="dynamic-text" id="altLabel" x="560" y="355" fill="#4cb888" font-size="12" font-weight="700">Alt: 7.5°</text>
+              <line class="dynamic-line" id="azLine" x1="400" y1="380" x2="550" y2="380" stroke="#e8923c" stroke-width="2.5"/>
+              <text class="dynamic-text" id="azLabel" x="460" y="372" text-anchor="middle" fill="#e8923c" font-size="12" font-weight="700">Az: 270°</text>
+              <line class="dynamic-line" id="elongLine" x1="400" y1="380" x2="550" y2="320" stroke="#ff6b6b" stroke-width="2" stroke-dasharray="6,3"/>
+              <text class="dynamic-text" id="elongLabel2" x="470" y="345" fill="#ff6b6b" font-size="11" font-weight="700">Elong: 14.5°</text>
+              <text class="dynamic-text" id="distLabel" x="470" y="360" fill="#4cb888" font-size="9">Jarak: 384,400 km</text>
+              <g id="moonGroup" class="moon-pulse" transform="translate(550, 320)"><circle cx="0" cy="0" r="30" fill="#f4d160" opacity="0.15"/><circle cx="0" cy="0" r="18" fill="url(#moonGrad)"/><circle cx="7" cy="-2" r="16" fill="#0a1530"/></g>
+              <text class="dynamic-text" id="moonLabel" x="550" y="280" text-anchor="middle" fill="#f4d160" font-size="11" font-weight="700">HILAL · BARAT</text>
+              <text class="dynamic-text" id="moonDistLabel" x="550" y="295" text-anchor="middle" fill="#4cb888" font-size="9">384,400 km</text>
+              <circle class="dynamic-line" id="moonShadow" cx="550" cy="380" r="4" fill="#4cb888" opacity="0.7"/>
+              <text class="dynamic-text" id="directionLabel" x="780" y="375" text-anchor="end" fill="#d4af37" font-size="11" font-weight="700">→ BARAT</text>
+              <text x="400" y="30" text-anchor="middle" fill="#f4d160" font-size="14" font-weight="800">ILUSTRASI POSISI HILAL & BUSUR DERAJAT</text>
+              <text x="400" y="48" text-anchor="middle" fill="#d4af37" font-size="10">Kamera AR · Kompas Otomatis</text>
+            </svg>
+          </div>
+          <div class="hilal-data-panel">
+            <div class="text-center mb-4"><div class="font-arabic text-2xl gradient-gold mb-1">حِسَاب الْهِلَال</div><h3 class="text-lg font-bold">Data Hisab Hilal</h3></div>
+            <div class="ar-status-box inactive" id="arStatusBox"><i class="fa-solid fa-circle-info mr-1"></i> Status: <strong>MATI</strong></div>
+            <button class="ar-toggle-btn ar-toggle-off" id="arToggleBtn" onclick="toggleAR()"><i class="fa-solid fa-camera"></i><span id="arToggleText">AKTIFKAN KAMERA & KOMPAS AR</span></button>
+            <div class="compass-container mb-2 mt-3">
+              <svg class="compass-svg" viewBox="0 0 260 260">
+                <circle cx="130" cy="130" r="118" fill="rgba(7,10,20,0.6)" stroke="#d4af37" stroke-width="2"/>
+                <circle cx="130" cy="130" r="98" fill="none" stroke="rgba(212,175,55,0.3)" stroke-width="1"/>
+                <circle cx="130" cy="130" r="78" fill="none" stroke="rgba(212,175,55,0.2)" stroke-width="1" stroke-dasharray="2,3"/>
+                <text x="130" y="42" text-anchor="middle" fill="#f4d160" font-size="18" font-weight="800">N</text><text x="130" y="228" text-anchor="middle" fill="#8b9bb4" font-size="18" font-weight="800">S</text><text x="38" y="136" text-anchor="middle" fill="#8b9bb4" font-size="18" font-weight="800">W</text><text x="222" y="136" text-anchor="middle" fill="#8b9bb4" font-size="18" font-weight="800">E</text>
+                <text x="62" y="68" text-anchor="middle" fill="#5a6b85" font-size="11" font-weight="600">NW</text><text x="198" y="68" text-anchor="middle" fill="#5a6b85" font-size="11" font-weight="600">NE</text><text x="62" y="200" text-anchor="middle" fill="#5a6b85" font-size="11" font-weight="600">SW</text><text x="198" y="200" text-anchor="middle" fill="#5a6b85" font-size="11" font-weight="600">SE</text>
+                <text x="130" y="8" text-anchor="middle" fill="#5a6b85" font-size="8">0°</text><text x="252" y="134" text-anchor="middle" fill="#5a6b85" font-size="8">90°</text><text x="130" y="258" text-anchor="middle" fill="#5a6b85" font-size="8">180°</text><text x="8" y="134" text-anchor="middle" fill="#5a6b85" font-size="8">270°</text>
+                <g class="compass-needle-group" id="compassNeedle"><polygon points="130,35 124,130 136,130" fill="#ff6b6b"/><polygon points="130,225 124,130 136,130" fill="#5a6b85"/><circle cx="130" cy="130" r="8" fill="#d4af37" stroke="#0a0e1a" stroke-width="2"/></g>
+                <circle cx="130" cy="130" r="4" fill="#0a0e1a"/>
+                <text x="130" y="170" text-anchor="middle" fill="#f4d160" font-size="13" font-weight="800" id="compassDir">BARAT</text>
+                <text x="130" y="185" text-anchor="middle" fill="#d4af37" font-size="10" font-weight="700" id="compassDeg">270°</text>
+              </svg>
+            </div>
+            <div class="degree-display mb-3"><div class="degree-num" id="bigDegree">270°</div><div class="degree-label">Derajat Jarum Kompas</div></div>
+            <div class="direction-pad"><button class="dir-btn" onclick="shootDirection('N')"><span>Utara</span><span class="dir-deg">0°</span></button><button class="dir-btn" onclick="shootDirection('NE')"><span>Timur Laut</span><span class="dir-deg">45°</span></button><button class="dir-btn" onclick="shootDirection('E')"><span>Timur</span><span class="dir-deg">90°</span></button><button class="dir-btn" onclick="shootDirection('SE')"><span>Tenggara</span><span class="dir-deg">135°</span></button></div>
+            <div class="direction-pad mt-1.5"><button class="dir-btn" onclick="shootDirection('S')"><span>Selatan</span><span class="dir-deg">180°</span></button><button class="dir-btn" onclick="shootDirection('SW')"><span>Barat Daya</span><span class="dir-deg">225°</span></button><button class="dir-btn active" onclick="shootDirection('W')"><span>Barat</span><span class="dir-deg">270°</span></button><button class="dir-btn" onclick="shootDirection('NW')"><span>Barat Laut</span><span class="dir-deg">315°</span></button></div>
+            <div class="data-row mt-3"><span class="data-label"><i class="fa-solid fa-compass mr-1 text-yellow-400"></i>Arah</span><span class="data-value" id="dirValue">Barat</span></div>
+            <div class="data-row"><span class="data-label"><i class="fa-solid fa-arrow-up mr-1 text-emerald-400"></i>Altitude</span><span class="data-value" id="altValue" style="color:#4cb888">7.5°</span></div>
+            <div class="data-row"><span class="data-label"><i class="fa-solid fa-arrows-left-right mr-1 text-orange-400"></i>Azimuth</span><span class="data-value" id="azValue" style="color:#e8923c">270°</span></div>
+            <div class="data-row"><span class="data-label"><i class="fa-solid fa-angle-up mr-1 text-red-400"></i>Elongasi</span><span class="data-value" id="elongValue" style="color:#ff6b6b">14.5°</span></div>
+            <div class="data-row"><span class="data-label"><i class="fa-solid fa-moon mr-1 text-yellow-400"></i>Bumi-Bulan</span><span class="data-value" id="distMoon">384,400 km</span></div>
+            <div class="data-row"><span class="data-label"><i class="fa-solid fa-clock mr-1 text-yellow-400"></i>Terbenam</span><span class="data-value" id="setTime">19:08</span></div>
+            <div class="mt-3 p-3 rounded-lg" style="background:rgba(76,184,136,0.1);border:1px solid rgba(76,184,136,0.3)"><div class="text-xs font-bold mb-1" id="statusText"><i class="fa-solid fa-check-circle mr-1"></i>STATUS: TERLIHAT</div><p class="text-[10px] text-slate-400" id="statusDetail">Optimal</p></div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- 20 KUMPULAN DOA -->
+      <section id="kumpulan-doa" class="mb-12">
+        <div class="reveal text-center mb-8">
+          <div class="pill pill-gold mb-4"><i class="fa-solid fa-hands-praying text-xs"></i> KUMPULAN DOA</div>
+          <h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">20 <span class="gradient-gold">Doa Harian</span></h2>
+          <p class="text-slate-400 max-w-2xl mx-auto mt-3">Kumpulan 20 doa pilihan: Arab, Latin, dan Artinya.</p>
+        </div>
+        <div class="reveal card p-6" id="doaContainer"></div>
+      </section>
+      
+      <!-- KALKULATOR ZAKAT -->
+      <section id="kalkulator-zakat" class="mb-12">
+        <div class="reveal text-center mb-8">
+          <div class="pill pill-emerald mb-4"><i class="fa-solid fa-calculator text-xs"></i> KALKULATOR ZAKAT</div>
+          <h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Kalkulator <span class="gradient-emerald">Zakat</span></h2>
+          <p class="text-slate-400 max-w-2xl mx-auto mt-3">Hitung Zakat Fitrah & Zakat Mal. Pilih bentuk: beras, uang tunai, kurma, gandum, daging, dll.</p>
+        </div>
+        <div class="reveal card p-6">
+          <!-- Tab Zakat -->
+          <div class="flex gap-3 mb-6 justify-center">
+            <button class="zakat-tab active" id="tabFitrah" onclick="switchZakatTab('fitrah')">Zakat Fitrah</button>
+            <button class="zakat-tab" id="tabMal" onclick="switchZakatTab('mal')">Zakat Mal (Harta)</button>
+          </div>
+          
+          <!-- ZAKAT FITRAH -->
+          <div id="zakatFitrahPanel">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <div class="zakat-input-group">
+                  <label class="zakat-input-label">Jumlah Jiwa (orang)</label>
+                  <input type="number" class="zakat-input" id="fitrahJiwa" value="1" min="1" oninput="calcFitrah()">
+                </div>
+                <div class="zakat-input-group">
+                  <label class="zakat-input-label">Bentuk Zakat</label>
+                  <select class="zakat-select" id="fitrahBentuk" onchange="calcFitrah()">
+                    <option value="beras">Beras (2.5 kg/orang)</option>
+                    <option value="uang">Uang Tunai (Rp 40.000/orang)</option>
+                    <option value="kurma">Kurma (2.5 kg/orang)</option>
+                    <option value="gandum">Gandum (2.5 kg/orang)</option>
+                    <option value="daging">Daging (2.5 kg/orang)</option>
+                    <option value="beras-premium">Beras Premium (2.5 kg/orang)</option>
+                  </select>
+                </div>
+                <div class="zakat-input-group" id="fitrahHargaGroup" style="display:none;">
+                  <label class="zakat-input-label">Harga per kg (Rp)</label>
+                  <input type="number" class="zakat-input" id="fitrahHarga" value="15000" oninput="calcFitrah()">
+                </div>
+              </div>
+              <div>
+                <div class="zakat-result" id="fitrahResult">
+                  <div class="zakat-result-num" id="fitrahResultNum">2.5 kg</div>
+                  <div class="zakat-result-label" id="fitrahResultLabel">Total Beras</div>
+                  <div class="zakat-detail" id="fitrahDetail">Untuk 1 jiwa</div>
+                  <div class="zakat-info" id="fitrahInfo">Zakat Fitrah = 1 sha' (±2.5 kg) makanan pokok per jiwa</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- ZAKAT MAL -->
+          <div id="zakatMalPanel" style="display:none;">
+            <div class="grid md:grid-cols-2 gap-6">
+              <div>
+                <div class="zakat-input-group">
+                  <label class="zakat-input-label">Total Harta (Rp)</label>
+                  <input type="number" class="zakat-input" id="malHarta" value="0" oninput="calcMal()">
+                </div>
+                <div class="zakat-input-group">
+                  <label class="zakat-input-label">Hutang (Rp)</label>
+                  <input type="number" class="zakat-input" id="malHutang" value="0" oninput="calcMal()">
+                </div>
+                <div class="zakat-input-group">
+                  <label class="zakat-input-label">Harga Emas per gram (Rp)</label>
+                  <input type="number" class="zakat-input" id="malEmas" value="1350000" oninput="calcMal()">
+                </div>
+                <div class="zakat-input-group">
+                  <label class="zakat-input-label">Bentuk Pembayaran</label>
+                  <select class="zakat-select" id="malBentuk" onchange="calcMal()">
+                    <option value="uang">Uang Tunai</option>
+                    <option value="beras">Beras</option>
+                    <option value="kurma">Kurma</option>
+                    <option value="gandum">Gandum</option>
+                    <option value="daging">Daging</option>
+                  </select>
+                </div>
+                <div class="zakat-input-group" id="malHargaGroup" style="display:none;">
+                  <label class="zakat-input-label">Harga per kg (Rp)</label>
+                  <input type="number" class="zakat-input" id="malHargaBarang" value="15000" oninput="calcMal()">
+                </div>
+              </div>
+              <div>
+                <div class="zakat-result" id="malResult">
+                  <div class="zakat-result-num" id="malResultNum">Rp 0</div>
+                  <div class="zakat-result-label" id="malResultLabel">Zakat Mal (2.5%)</div>
+                  <div class="zakat-detail" id="malDetail">Nisab: Rp 0</div>
+                  <div class="zakat-info" id="malInfo">Zakat Mal = 2.5% per tahun jika harta ≥ nisab (85 gram emas) & dimiliki 1 tahun</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- IMSAKIYAH -->
+      <section id="imsakiyah" class="mb-12">
+        <div class="reveal text-center mb-8">
+          <div class="pill pill-gold mb-4"><i class="fa-solid fa-clock text-xs"></i> IMSAKIYAH</div>
+          <h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Jadwal Imsakiyah <span class="gradient-gold">Ramadhan</span></h2>
+        </div>
+        <div class="reveal imsakiyah-wrapper" id="imsakiyahPrint">
+          <div class="imsakiyah-pattern"></div>
+          <div class="imsakiyah-header">
+            <div class="font-arabic imsakiyah-arabic">جَدْوَل الْإِمْسَاكِيَّة رَمَضَان</div>
+            <h3 class="imsakiyah-title">JADWAL IMSAKIYAH RAMADHAN 1447 H / 2026 M</h3>
+            <p class="imsakiyah-subtitle" id="imsakiyahSubtitle">Untuk Wilayah Jakarta dan Sekitarnya</p>
+          </div>
+          <div class="flex flex-wrap gap-2 justify-center p-4">
+            <button class="city-btn active" onclick="selectCity('Jakarta')">Jakarta</button>
+            <button class="city-btn" onclick="selectCity('Bandung')">Bandung</button>
+            <button class="city-btn" onclick="selectCity('Surabaya')">Surabaya</button>
+            <button class="city-btn" onclick="selectCity('Medan')">Medan</button>
+            <button class="city-btn" onclick="selectCity('Makassar')">Makassar</button>
+            <button class="city-btn" onclick="selectCity('Semarang')">Semarang</button>
+            <button class="city-btn" onclick="selectCity('Yogyakarta')">Yogyakarta</button>
+            <button class="city-btn" onclick="selectCity('Palembang')">Palembang</button>
+          </div>
+          <div style="padding:0 16px 16px;overflow-x:auto;">
+            <table class="imsakiyah-table"><thead><tr><th>Tgl Masehi</th><th>Tgl Hijriah</th><th>Hari</th><th>Imsak</th><th>Subuh</th><th>Dzuhur</th><th>Ashar</th><th>Maghrib</th><th>Isya</th></tr></thead><tbody id="imsakiyahBody"></tbody></table>
+          </div>
+          <div class="flex flex-wrap gap-3 justify-center p-5 border-t-2 border-yellow-600/20">
+            <button class="imsakiyah-btn imsakiyah-btn-print" onclick="window.print()"><i class="fa-solid fa-print"></i> Cetak</button>
+            <button class="imsakiyah-btn imsakiyah-btn-pdf" onclick="window.print()"><i class="fa-solid fa-file-pdf"></i> Unduh PDF</button>
+          </div>
+        </div>
+      </section>
+      
+      <!-- PANDUAN PUASA LENGKAP -->
+      <section id="panduan-puasa" class="mb-12">
+        <div class="reveal text-center mb-8">
+          <div class="pill pill-emerald mb-4"><i class="fa-solid fa-moon text-xs"></i> PANDUAN PUASA</div>
+          <h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Panduan <span class="gradient-emerald">Puasa Lengkap</span></h2>
+          <p class="text-slate-400 max-w-2xl mx-auto mt-3">Rukun, syarat, sunnah, yang membatalkan, dan adab puasa Ramadhan.</p>
+        </div>
+        <div class="reveal card p-6" id="panduanPuasaContainer"></div>
+      </section>
+      
+      <!-- MAKKAH MADINAH -->
+      <section id="makkah-madinah" class="mb-12">
+        <div class="reveal text-center mb-8">
+          <div class="pill pill-live mb-4"><i class="fa-solid fa-kaaba text-xs"></i> LIVE</div>
+          <h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Live <span class="gradient-gold">Makkah & Madinah</span></h2>
+        </div>
+        <div class="reveal grid md:grid-cols-2 gap-6">
+          <div class="haram-card"><div class="haram-video"><iframe src="https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CP2dU5Goj2zQ" allowfullscreen></iframe></div><div class="haram-info"><div class="flex items-center justify-between"><div><div class="haram-name">Masjidil Haram</div><div class="haram-arabic">الْمَسْجِد الْحَرَام</div></div><span class="pill pill-live">LIVE 24/7</span></div><p class="haram-desc">Makkah Al-Mukarramah.</p></div></div>
+          <div class="haram-card"><div class="haram-video"><iframe src="https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CP2dU5Goj2zQ" allowfullscreen></iframe></div><div class="haram-info"><div class="flex items-center justify-between"><div><div class="haram-name">Masjid Nabawi</div><div class="haram-arabic">الْمَسْجِد النَّبَوِي</div></div><span class="pill pill-live">LIVE 24/7</span></div><p class="haram-desc">Madinah Al-Munawwarah.</p></div></div>
+        </div>
+      </section>
+      
+      <!-- LIVE TV -->
+      <section id="live-tv" class="mb-12">
+        <div class="reveal text-center mb-8"><div class="pill pill-live mb-4"><i class="fa-solid fa-tower-broadcast text-xs"></i> LIVE TV</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Live TV & <span class="gradient-gold">Streaming</span></h2></div>
+        <div class="reveal mb-6"><div class="streaming-iframe-wrapper"><iframe id="mainPlayer" src="https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CP2dU5Goj2zQ" allowfullscreen></iframe></div></div>
+        <div class="reveal grid grid-cols-2 md:grid-cols-4 gap-4" id="liveTVGrid"></div>
+      </section>
+      
+      <section id="kalender-hijriah" class="mb-12"><div class="reveal text-center mb-8"><div class="pill pill-gold mb-4"><i class="fa-solid fa-calendar-days text-xs"></i> KALENDER ISLAM</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Kalender <span class="gradient-gold">Hijriah</span></h2></div><div class="reveal flex flex-wrap gap-2 mb-6 justify-center" id="hijriTabs"></div><div class="reveal card p-6" id="hijriDetail"></div></section>
+      <section id="kalender-masehi" class="mb-12"><div class="reveal text-center mb-8"><div class="pill pill-danger mb-4"><i class="fa-solid fa-flag text-xs"></i> KALENDER</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Kalender <span style="background:linear-gradient(135deg,#ff6b6b,#c44545);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Masehi</span> <span id="currentYearLabel">2025</span></h2></div><div class="reveal flex flex-wrap gap-2 mb-6 justify-center" id="masehiTabs"></div><div class="reveal card p-6" id="masehiDetail"></div></section>
+      <section id="unduh" class="mb-12"><div class="reveal text-center mb-8"><div class="pill pill-gold mb-4"><i class="fa-solid fa-print text-xs"></i> UNDUH</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Unduh & Cetak <span class="gradient-gold">Kalender</span></h2></div><div class="reveal grid md:grid-cols-2 gap-6 max-w-4xl mx-auto"><div class="card p-8 cursor-pointer text-center" style="border-color:rgba(212,175,55,0.4)" onclick="openPrintCalendar('hijri')"><div class="w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-4" style="background:linear-gradient(135deg,var(--gold),var(--gold-dark))"><i class="fa-solid fa-moon text-slate-900 text-2xl"></i></div><div class="font-bold text-xl gradient-gold">Kalender Hijriah</div></div><div class="card p-8 cursor-pointer text-center" style="border-color:rgba(196,69,69,0.4)" onclick="openPrintCalendar('masehi')"><div class="w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-4" style="background:linear-gradient(135deg,#ff6b6b,#c44545)"><i class="fa-solid fa-calendar text-white text-2xl"></i></div><div class="font-bold text-xl" style="background:linear-gradient(135deg,#ff6b6b,#c44545);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Kalender Masehi</div></div></div></section>
+      <section id="puasa-sunnah" class="mb-12"><div class="reveal text-center mb-8"><div class="pill pill-emerald mb-4"><i class="fa-solid fa-utensils text-xs"></i> SUNNAH</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Puasa <span class="gradient-emerald">Sunnah</span></h2></div><div class="reveal grid md:grid-cols-3 gap-4" id="sunnahFasts"></div></section>
+      <section id="puasa-haram" class="mb-12"><div class="reveal text-center mb-8"><div class="pill pill-danger mb-4"><i class="fa-solid fa-ban text-xs"></i> HARAM</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Puasa <span style="background:linear-gradient(135deg,#ff6b6b,#c44545);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Haram</span></h2></div><div class="reveal grid md:grid-cols-3 gap-4" id="haramFasts"></div></section>
+      <section id="hari-nasional" class="mb-12"><div class="reveal text-center mb-8"><div class="pill pill-gold mb-4"><i class="fa-solid fa-star text-xs"></i> NKRI</div><h2 class="text-3xl md:text-5xl font-black mb-3 title-deco inline-block">Hari <span class="gradient-gold">Nasional</span></h2></div><div class="reveal grid md:grid-cols-3 gap-4" id="nationalDays"></div></section>
+    </div>
+  </main>
+</div>
+
+<div class="modal-overlay" id="printModal"><div class="modal-content" style="max-width:1400px;"><div class="modal-header"><h3 class="font-bold text-lg" id="modalTitle">Pratinjau</h3><button onclick="document.getElementById('printModal').classList.remove('active')" class="px-5 py-2.5 rounded-lg font-semibold text-gray-700 text-sm border border-gray-300"><i class="fa-solid fa-xmark mr-1"></i> Tutup</button></div><div class="modal-body" id="modalBody"></div></div></div>
+
+<script>
+// DATA
+const hijriMonths=[{name:'Muharram',arabic:'مُحَرَّم',number:1,days:30,year:1447,desc:'Bulan pertama.',events:[{d:1,e:'Tahun Baru Hijriah',type:'holiday'},{d:9,e:'Puasa Tasua',type:'fasting'},{d:10,e:'Puasa Asyura',type:'fasting'}]},{name:'Safar',arabic:'صَفَر',number:2,days:29,year:1447,desc:'Bulan kedua.',events:[{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Rabiul Awwal',arabic:'رَبِيعُ الْأَوَّل',number:3,days:30,year:1447,desc:'Kelahiran Nabi ﷺ.',events:[{d:12,e:'Maulid Nabi ﷺ',type:'holiday'},{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Rabiul Akhir',arabic:'رَبِيعُ الْآخِر',number:4,days:29,year:1447,desc:'Bulan keempat.',events:[{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Jumadil Awwal',arabic:'جُمَادَى الْأُولَى',number:5,days:30,year:1447,desc:'Bulan kelima.',events:[{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Jumadil Akhir',arabic:'جُمَادَى الْآخِرَة',number:6,days:29,year:1447,desc:'Bulan keenam.',events:[{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Rajab',arabic:'رَجَب',number:7,days:30,year:1447,desc:'Bulan haram.',events:[{d:1,e:'Awal Bulan Haram',type:'special'},{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'},{d:27,e:'Isra Mikraj ﷺ',type:'holiday'}]},{name:'Sya\'ban',arabic:'شَعْبَان',number:8,days:29,year:1447,desc:'Persiapan Ramadhan.',events:[{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Nisfu Sya\'ban',type:'special'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Ramadhan',arabic:'رَمَضَان',number:9,days:30,year:1447,desc:'Bulan suci.',events:[{d:1,e:'Awal Ramadhan',type:'holiday'},{d:17,e:'Nuzulul Qur\'an',type:'special'},{d:27,e:'Lailatul Qadar',type:'special'}]},{name:'Syawal',arabic:'شَوَّال',number:10,days:29,year:1447,desc:'Idul Fitri.',events:[{d:1,e:'Idul Fitri 1447 H',type:'holiday'},{d:2,e:'Puasa 6 Syawal',type:'fasting'},{d:3,e:'Puasa 6 Syawal',type:'fasting'},{d:4,e:'Puasa 6 Syawal',type:'fasting'},{d:5,e:'Puasa 6 Syawal',type:'fasting'},{d:6,e:'Puasa 6 Syawal',type:'fasting'},{d:7,e:'Puasa 6 Syawal',type:'fasting'}]},{name:'Zulqaidah',arabic:'ذُو الْقَعْدَة',number:11,days:30,year:1447,desc:'Bulan haram.',events:[{d:13,e:'Ayyamul Bidh',type:'fasting'},{d:14,e:'Ayyamul Bidh',type:'fasting'},{d:15,e:'Ayyamul Bidh',type:'fasting'}]},{name:'Zulhijjah',arabic:'ذُو الْحِجَّة',number:12,days:29,year:1447,desc:'Bulan haji.',events:[{d:1,e:'Puasa Sunnah',type:'fasting'},{d:8,e:'Hari Tarwiyah',type:'special'},{d:9,e:'Puasa Arafah',type:'fasting'},{d:10,e:'Idul Adha 1447 H',type:'holiday'},{d:11,e:'Tasrik 1',type:'haram'},{d:12,e:'Tasrik 2',type:'haram'},{d:13,e:'Tasrik 3',type:'haram'}]}];
+const monthNames=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const days=['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
+const CURRENT_YEAR=new Date().getFullYear();
+let activeMasehiMonth=new Date().getMonth(),activeHijriMonth=8;
+document.getElementById('currentYearLabel').textContent=CURRENT_YEAR;
+function getMasehiMonthData(y,mi){return{name:monthNames[mi],days:new Date(y,mi+1,0).getDate(),startDay:new Date(y,mi,1).getDay(),year:y,events:[]};}
+function setActiveNav(el){document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));el.classList.add('active');document.getElementById('pageTitle').textContent=el.querySelector('span').textContent;const t=document.getElementById(el.getAttribute('href').substring(1));if(t)setTimeout(()=>t.scrollIntoView({behavior:'smooth'}),100);if(window.innerWidth<=1024)document.getElementById('sidebar').classList.remove('open');}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
+
+// =========================================
+// 20 KUMPULAN DOA
+// =========================================
+const doaList=[
+  {n:1,t:'Doa Niat Puasa Ramadhan',a:'نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ فَارِضًا لِلَّهِ تَعَالَى',l:'Nawaitu shauma ghadin \'an adaa\'i fardhi syahri ramadhaani haadzihis sanati faardhal lillaahi ta\'ala',m:'"Aku berniat puasa esok hari untuk menunaikan kewajiban puasa Ramadhan tahun ini, fardu karena Allah Ta\'ala."'},
+  {n:2,t:'Doa Buka Puasa',a:'اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ',l:'Allahumma laka shumtu wa \'ala rizqika afthartu',m:'"Ya Allah, untuk-Mu aku berpuasa dan dengan rezeki-Mu aku berbuka."'},
+  {n:3,t:'Doa Sahur',a:'اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ',l:'Allahumma barik lana fi ma razaqtana wa qina \'adzaaban naar',m:'"Ya Allah, berkahilah kami pada apa yang Engkau rezekikan dan lindungilah kami dari azab neraka."'},
+  {n:4,t:'Doa Lailatul Qadar',a:'اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنِّي',l:'Allahumma innaka \'afuwwun tuhibbul \'afwa fa\'fu \'anni',m:'"Ya Allah, Engkau Maha Pemaaf, Engkau menyukai pemaafan, maka maafkanlah aku."'},
+  {n:5,t:'Doa Sebelum Makan',a:'اللَّهُمَّ بَارِكْ لَنَا فِيمَا رَزَقْتَنَا وَقِنَا عَذَابَ النَّارِ',l:'Allahumma barik lana fi ma razaqtana',m:'"Ya Allah, berkatilah kami dalam rezeki yang Engkau berikan."'},
+  {n:6,t:'Doa Sesudah Makan',a:'الْحَمْدُ لِلَّهِ الَّذِي أَطْعَمَنَا وَسَقَانَا وَجَعَلَنَا مُسْلِمِينَ',l:'Alhamdu lillaahi ladzii ath\'amanaa wa saqaanaa wa ja\'alanaa muslimiin',m:'"Segala puji bagi Allah yang memberi makan dan minum serta menjadikan kami muslim."'},
+  {n:7,t:'Doa Masuk Masjid',a:'اللَّهُمَّ افْتَحْ لِي أَبْوَابَ رَحْمَتِكَ',l:'Allahummaftah lii abwaaba rahmatik',m:'"Ya Allah, bukakanlah untukku pintu-pintu rahmat-Mu."'},
+  {n:8,t:'Doa Keluar Masjid',a:'اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَضْلِكَ',l:'Allahumma innii as\'aluka min fadhlik',m:'"Ya Allah, sesungguhnya aku memohon kepada-Mu karunia-Mu."'},
+  {n:9,t:'Doa Masuk Rumah',a:'اللَّهُمَّ إِنِّي أَسْأَلُكَ خَيْرَ الْمَوْلِجِ وَخَيْرَ الْمَخْرَجِ',l:'Allahumma innii as\'aluka khairal mawliji wa khairal makhraji',m:'"Ya Allah, aku memohon kepada-Mu sebaik-baik tempat masuk dan sebaik-baik tempat keluar."'},
+  {n:10,t:'Doa Keluar Rumah',a:'بِسْمِ اللَّهِ تَوَكَّلْتُ عَلَى اللَّهِ لَا حَوْلَ وَلَا قُوَّةَ إِلَّا بِاللَّهِ',l:'Bismillaahi tawakkaltu \'alallaah, laa haula wa laa quwwata illaa billaah',m:'"Dengan nama Allah, aku bertawakal kepada Allah. Tiada daya dan kekuatan kecuali dengan Allah."'},
+  {n:11,t:'Doa Sebelum Tidur',a:'بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا',l:'Biismika Allahumma amuutu wa ahyaa',m:'"Dengan nama-Mu ya Allah, aku mati dan aku hidup."'},
+  {n:12,t:'Doa Bangun Tidur',a:'الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ',l:'Alhamdu lillaahi ladzii ahyaanaa ba\'da maa amaatanaa wa ilaihin nusyuur',m:'"Segala puji bagi Allah yang menghidupkan kami setelah mematikan kami, dan kepada-Nya kami dikembalikan."'},
+  {n:13,t:'Doa Masuk Kamar Mandi',a:'اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْخُبُثِ وَالْخَبَائِثِ',l:'Allahumma innii a\'uudzu bika minal khubutsi wal khabaa\'its',m:'"Ya Allah, aku berlindung kepada-Mu dari setan laki-laki dan perempuan."'},
+  {n:14,t:'Doa Keluar Kamar Mandi',a:'غُفْرَانَكَ',l:'Ghufraanaka',m:'"Aku memohon ampunan-Mu."'},
+  {n:15,t:'Doa Naik Kendaraan',a:'سُبْحَانَ الَّذِي سَخَّرَ لَنَا هَذَا وَمَا كُنَّا لَهُ مُقْرِنِينَ وَإِنَّا إِلَى رَبِّنَا لَمُنْقَلِبُونَ',l:'Subhaanal ladzii sakhkhara lanaa haadzaa wa maa kunnaa lahu muqriniina wa innaa ilaa rabbinaa lamunqalibuun',m:'"Maha Suci Allah yang menundukkan kendaraan ini bagi kami, padahal kami tidak mampu menguasainya. Dan sesungguhnya kami akan kembali kepada Tuhan kami."'},
+  {n:16,t:'Doa Sebelum Belajar',a:'رَبِّ زِدْنِي عِلْمًا وَارْزُقْنِي فَهْمًا',l:'Rabbi zidnii \'ilman warzuqnii fahmaa',m:'"Ya Tuhanku, tambahkanlah aku ilmu dan berikanlah aku pemahaman."'},
+  {n:17,t:'Doa Keutamaan Ilmu',a:'اللَّهُمَّ عَلِّمْنَا مَا يَنْفَعُنَا وَانْفَعْنَا بِمَا عَلَّمْتَنَا',l:'Allahumma \'allimnaa maa yanfa\'unaa wanfa\'naa bimaa \'allamtanaa',m:'"Ya Allah, ajarkanlah kami apa yang bermanfaat bagi kami dan manfaatkanlah apa yang telah Engkau ajarkan."'},
+  {n:18,t:'Doa Kebaikan Dunia Akhirat',a:'رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ',l:'Rabbanaa aatinaa fid dunyaa hasanah wa fil aakhirati hasanah wa qinaa \'adzaaban naar',m:'"Ya Tuhan kami, berilah kami kebaikan di dunia dan kebaikan di akhirat, dan lindungilah kami dari azab neraka."'},
+  {n:19,t:'Doa Sapu Jagat',a:'اللَّهُمَّ إِنَّا نَعُوذُ بِكَ مِنْ عِلْمٍ لَا يَنْفَعُ وَرَبٍّ لَا يُتَّقِي وَقَلْبٍ لَا يَخْشَعُ وَنَفْسٍ لَا تَشْبَعُ وَدَعْوَةٍ لَا يُسْتَجَابُ لَهَا',l:'Allahumma inna na\'uudzu bika min \'ilmin laa yanfa\'u wa rabbil laa yuttaqaa wa qalbil laa yakhsha\'u wa nafsil laa tasyba\'u wa da\'watin laa yustaajaabu lahaa',m:'"Ya Allah, kami berlindung kepada-Mu dari ilmu yang tidak bermanfaat, hati yang tidak khusyuk, nafsu yang tidak kenyang, dan doa yang tidak dikabulkan."'},
+  {n:20,t:'Doa Istighfar (Sayyidul Istighfar)',a:'اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ',l:'Allahumma anta rabbii laa ilaaha illaa anta khalaqtanii wa ana \'abduka wa ana \'ala \'ahdika wa wa\'dika mas-tatha\'tu a\'uudzu bika min syarri maa shana\'tu abuu\'u laka bi ni\'matika \'alayya wa abuu\'u bidzanbii faghfir lii fa innahu laa yaghfirudz-dzunuuba illaa anta',m:'"Ya Allah, Engkau Tuhanku, tiada Tuhan selain Engkau. Engkau menciptakanku dan aku hamba-Mu. Aku berusaha setia pada janji dan ikatan-Mu semampuku. Aku berlindung kepada-Mu dari kejahatan yang kulakukan. Aku mengakui nikmat-Mu atasku dan aku mengakui dosaku, maka ampunilah aku. Sesungguhnya tiada yang mengampuni dosa selain Engkau."'}
+];
+
+function renderDoa(){
+  let html='';
+  doaList.forEach(d=>{
+    html+=`<div class="doa-card">
+      <div class="doa-num">${d.n}</div>
+      <div class="doa-title">${d.t}</div>
+      <div class="doa-arabic">${d.a}</div>
+      <div class="doa-latin"><i class="fa-solid fa-language mr-1 text-emerald-400"></i> ${d.l}</div>
+      <div class="doa-translation"><strong>Artinya:</strong> ${d.m}</div>
+    </div>`;
+  });
+  document.getElementById('doaContainer').innerHTML=html;
+}
+
+// =========================================
+// PANDUAN PUASA LENGKAP
+// =========================================
+function renderPanduanPuasa(){
+  const html=`
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-list-check mr-2 text-yellow-400"></i>Rukun Puasa</div>
+      <ol style="margin-left:20px;line-height:2;color:var(--cream);">
+        <li><strong style="color:var(--gold-light);">Niat</strong> — Dilakukan pada malam hari sebelum terbit fajar (sebelum masuk waktu Subuh).</li>
+        <li><strong style="color:var(--gold-light);">Imsak</strong> — Menahan diri dari makan, minum, hubungan suami-istri, dan hal-hal yang membatalkan puasa, dari terbit fajar (waktu Subuh) hingga terbenam matahari (waktu Maghrib).</li>
+      </ol>
+    </div>
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-user-check mr-2 text-emerald-400"></i>Syarat Wajib Puasa</div>
+      <ul style="margin-left:20px;line-height:2;color:var(--cream);">
+        <li><strong style="color:var(--emerald-light);">Islam</strong> — Puasa wajib bagi muslim</li>
+        <li><strong style="color:var(--emerald-light);">Baligh</strong> — Sudah dewasa (mimpi basah/haid)</li>
+        <li><strong style="color:var(--emerald-light);">Berakal</strong> — Tidak gila/hilang akal</li>
+        <li><strong style="color:var(--emerald-light);">Mampu</strong> — Sehat jasmani & rohani</li>
+      </ul>
+    </div>
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-circle-xmark mr-2 text-red-400"></i>Hal yang Membatalkan Puasa</div>
+      <ul style="margin-left:20px;line-height:2;color:var(--cream);">
+        <li>Makan dan minum <strong style="color:#ff6b6b;">dengan sengaja</strong></li>
+        <li>Muntah <strong style="color:#ff6b6b;">dengan sengaja</strong></li>
+        <li>Hubungan suami-istri di siang hari</li>
+        <li>Keluar darah haid atau nifas</li>
+        <li>Keluar air mani <strong style="color:#ff6b6b;">dengan sengaja</strong> (istimna')</li>
+        <li>Murtad (keluar dari Islam)</li>
+        <li>Gila atau hilang akal</li>
+      </ul>
+    </div>
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-star mr-2 text-yellow-400"></i>Sunnah-Sunnah Puasa</div>
+      <ul style="margin-left:20px;line-height:2;color:var(--cream);">
+        <li><strong style="color:var(--gold-light);">Makan sahur</strong> — Menunda sahur hingga mendekati waktu imsak</li>
+        <li><strong style="color:var(--gold-light);">Menyegerakan berbuka</strong> — Begitu masuk waktu Maghrib</li>
+        <li><strong style="color:var(--gold-light);">Berbuka dengan kurma</strong> atau air putih</li>
+        <li>Membaca doa berbuka puasa</li>
+        <li>Memberi makan orang yang berbuka (tharawih ramadhan)</li>
+        <li>Memperbanyak tilawah Al-Qur'an</li>
+        <li>Memperbanyak sedekah</li>
+        <li>Menjaga lisan dari perkataan sia-sia</li>
+        <li>I'tikaf di masjid (terutama 10 hari terakhir)</li>
+      </ul>
+    </div>
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-handshake mr-2 text-emerald-400"></i>Yang Diperbolehkan Tidak Puasa</div>
+      <ul style="margin-left:20px;line-height:2;color:var(--cream);">
+        <li><strong style="color:var(--emerald-light);">Sakit</strong> — Yang menyulitkan jika berpuasa</li>
+        <li><strong style="color:var(--emerald-light);">Musafir</strong> — Bepergian jauh (≥ 81 km)</li>
+        <li><strong style="color:var(--emerald-light);">Wanita haid/nifas</strong> — Wajib qadha</li>
+        <li><strong style="color:var(--emerald-light);">Hamil & menyusui</strong> — Qadha atau fidyah</li>
+        <li><strong style="color:var(--emerald-light);">Lansia renta</strong> — Bayar fidyah</li>
+      </ul>
+      <p style="margin-top:10px;font-size:13px;color:var(--muted);"><strong style="color:var(--gold-light);">Qadha:</strong> Mengganti puasa di hari lain di luar Ramadhan.<br><strong style="color:var(--gold-light);">Fidyah:</strong> Memberi makan orang miskin 1 sha' (2.5 kg) per hari.</p>
+    </div>
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-hands-praying mr-2 text-yellow-400"></i>Doa Niat Puasa</div>
+      <div class="doa-arabic">نَوَيْتُ صَوْمَ غَدٍ عَنْ أَدَاءِ فَرْضِ شَهْرِ رَمَضَانَ هَذِهِ السَّنَةِ فَارِضًا لِلَّهِ تَعَالَى</div>
+      <div class="doa-latin">Nawaitu shauma ghadin 'an adaa'i fardhi syahri ramadhaani haadzihis sanati faardhal lillaahi ta'ala</div>
+      <div class="doa-translation"><strong>Artinya:</strong> "Aku berniat puasa esok hari untuk menunaikan kewajiban puasa Ramadhan tahun ini, fardu karena Allah Ta'ala."</div>
+    </div>
+    <div class="doa-card">
+      <div class="doa-title"><i class="fa-solid fa-utensils mr-2 text-emerald-400"></i>Doa Buka Puasa</div>
+      <div class="doa-arabic">اللَّهُمَّ لَكَ صُمْتُ وَعَلَى رِزْقِكَ أَفْطَرْتُ</div>
+      <div class="doa-latin">Allahumma laka shumtu wa 'ala rizqika afthartu</div>
+      <div class="doa-translation"><strong>Artinya:</strong> "Ya Allah, untuk-Mu aku berpuasa dan dengan rezeki-Mu aku berbuka."</div>
+    </div>
+  `;
+  document.getElementById('panduanPuasaContainer').innerHTML=html;
+}
+
+// =========================================
+// KALKULATOR ZAKAT
+// =========================================
+function switchZakatTab(tab){
+  if(tab==='fitrah'){
+    document.getElementById('tabFitrah').classList.add('active');
+    document.getElementById('tabMal').classList.remove('active');
+    document.getElementById('zakatFitrahPanel').style.display='block';
+    document.getElementById('zakatMalPanel').style.display='none';
+    calcFitrah();
+  } else {
+    document.getElementById('tabFitrah').classList.remove('active');
+    document.getElementById('tabMal').classList.add('active');
+    document.getElementById('zakatFitrahPanel').style.display='none';
+    document.getElementById('zakatMalPanel').style.display='block';
+    calcMal();
+  }
+}
+
+function calcFitrah(){
+  const jiwa=parseInt(document.getElementById('fitrahJiwa').value)||1;
+  const bentuk=document.getElementById('fitrahBentuk').value;
+  const hargaGroup=document.getElementById('fitrahHargaGroup');
+  const resultNum=document.getElementById('fitrahResultNum');
+  const resultLabel=document.getElementById('fitrahResultLabel');
+  const detail=document.getElementById('fitrahDetail');
+  const info=document.getElementById('fitrahInfo');
+  
+  const perOrang=2.5; // kg
+  
+  if(bentuk==='uang'){
+    hargaGroup.style.display='none';
+    const perOrangUang=40000;
+    const total=jiwa*perOrangUang;
+    resultNum.textContent='Rp '+total.toLocaleString('id-ID');
+    resultLabel.textContent='Total Zakat Fitrah (Uang)';
+    detail.innerHTML=`${jiwa} jiwa × Rp ${perOrangUang.toLocaleString('id-ID')} = <strong style="color:#4cb888;">Rp ${total.toLocaleString('id-ID')}</strong>`;
+    info.textContent='Zakat Fitrah uang = nilai 2.5 kg beras per jiwa (±Rp 40.000)';
+  } else {
+    const labelMap={'beras':'Beras','kurma':'Kurma','gandum':'Gandum','daging':'Daging','beras-premium':'Beras Premium'};
+    const total=jiwa*perOrang;
+    resultNum.textContent=total+' kg';
+    resultLabel.textContent='Total '+labelMap[bentuk];
+    detail.innerHTML=`${jiwa} jiwa × ${perOrang} kg = <strong style="color:#4cb888;">${total} kg ${labelMap[bentuk]}</strong>`;
+    
+    if(bentuk!=='beras'&&bentuk!=='beras-premium'){
+      hargaGroup.style.display='block';
+      const harga=parseInt(document.getElementById('fitrahHarga').value)||0;
+      const totalNilai=total*harga;
+      detail.innerHTML+=`<br>Nilai setara: <strong style="color:var(--gold-light);">Rp ${totalNilai.toLocaleString('id-ID')}</strong>`;
+      info.textContent=`Zakat Fitrah ${labelMap[bentuk]} = 2.5 kg per jiwa. Harga Rp ${harga.toLocaleString('id-ID')}/kg`;
+    } else {
+      hargaGroup.style.display='none';
+      info.textContent=`Zakat Fitrah ${labelMap[bentuk]} = 1 sha' (±2.5 kg) per jiwa`;
+    }
+  }
+}
+
+function calcMal(){
+  const harta=parseFloat(document.getElementById('malHarta').value)||0;
+  const hutang=parseFloat(document.getElementById('malHutang').value)||0;
+  const emasHarga=parseFloat(document.getElementById('malEmas').value)||0;
+  const bentuk=document.getElementById('malBentuk').value;
+  const hargaGroup=document.getElementById('malHargaGroup');
+  const resultNum=document.getElementById('malResultNum');
+  const resultLabel=document.getElementById('malResultLabel');
+  const detail=document.getElementById('malDetail');
+  const info=document.getElementById('malInfo');
+  
+  const nisab=85*emasHarga; // 85 gram emas
+  const hartaBersih=harta-hutang;
+  const wajibZakat=hartaBersih>=nisab;
+  const zakat=wajibZakat?hartaBersih*0.025:0;
+  
+  if(bentuk==='uang'){
+    hargaGroup.style.display='none';
+    resultNum.textContent='Rp '+Math.round(zakat).toLocaleString('id-ID');
+    resultLabel.textContent='Zakat Mal (2.5% per tahun)';
+    detail.innerHTML=`Harta bersih: Rp ${hartaBersih.toLocaleString('id-ID')}<br>Nisab (85g emas): Rp ${nisab.toLocaleString('id-ID')}<br>Status: <strong style="color:${wajibZakat?'#4cb888':'#ff6b6b'};">${wajibZakat?'WAJIB ZAKAT':'BELUM NISAB'}</strong>`;
+    info.textContent='Zakat Mal = 2.5% per tahun jika harta ≥ nisab (85 gram emas) & dimiliki ≥ 1 tahun (haul)';
+  } else {
+    hargaGroup.style.display='block';
+    const hargaBarang=parseFloat(document.getElementById('malHargaBarang').value)||0;
+    const jumlahKg=Math.round(zakat/hargaBarang*100)/100;
+    const labelMap={'beras':'Beras','kurma':'Kurma','gandum':'Gandum','daging':'Daging'};
+    resultNum.textContent= jumlahKg>0?jumlahKg+' kg':'0 kg';
+    resultLabel.textContent='Zakat Mal dalam '+labelMap[bentuk];
+    detail.innerHTML=`Harta bersih: Rp ${hartaBersih.toLocaleString('id-ID')}<br>Zakat (2.5%): Rp ${Math.round(zakat).toLocaleString('id-ID')}<br>Setara: <strong style="color:#4cb888;">${jumlahKg} kg ${labelMap[bentuk]}</strong><br>Status: <strong style="color:${wajibZakat?'#4cb888':'#ff6b6b'};">${wajibZakat?'WAJIB ZAKAT':'BELUM NISAB'}</strong>`;
+    info.textContent=`Dihitung dari 2.5% harta bersih, dikonversi ke ${labelMap[bentuk]} (Rp ${hargaBarang.toLocaleString('id-ID')}/kg)`;
+  }
+}
+
+// =========================================
+// KOMPAS & AR
+// =========================================
+const dirData={'N':{label:'Utara',degree:0,azimuth:0,altitude:-5,elongasi:0,setTime:'--:--',status:'TIDAK TERLIHAT',desc:'Di belakang ufuk',color:'#ff6b6b',distMoon:'405,000 km',moonPos:{x:400,y:200,v:false}},'NE':{label:'Timur Laut',degree:45,azimuth:45,altitude:2,elongasi:5,setTime:'17:45',status:'KURANG MAMPU',desc:'Rendah',color:'#eab308',distMoon:'380,000 km',moonPos:{x:600,y:360,v:true}},'E':{label:'Timur',degree:90,azimuth:90,altitude:3,elongasi:6,setTime:'17:30',status:'KURANG MAMPU',desc:'Rendah',color:'#eab308',distMoon:'378,000 km',moonPos:{x:700,y:370,v:true}},'SE':{label:'Tenggara',degree:135,azimuth:135,altitude:5,elongasi:8,setTime:'18:00',status:'KURANG MAMPU',desc:'Belum optimal',color:'#eab308',distMoon:'376,000 km',moonPos:{x:650,y:375,v:true}},'S':{label:'Selatan',degree:180,azimuth:180,altitude:-3,elongasi:0,setTime:'--:--',status:'TIDAK TERLIHAT',desc:'Di belakang ufuk',color:'#ff6b6b',distMoon:'400,000 km',moonPos:{x:400,y:200,v:false}},'SW':{label:'Barat Daya',degree:225,azimuth:225,altitude:6.5,elongasi:12,setTime:'19:00',status:'TERLIHAT',desc:'Ideal',color:'#4cb888',distMoon:'385,000 km',moonPos:{x:200,y:375,v:true}},'W':{label:'Barat',degree:270,azimuth:270,altitude:7.5,elongasi:14.5,setTime:'19:08',status:'TERLIHAT',desc:'Optimal',color:'#4cb888',distMoon:'384,400 km',moonPos:{x:550,y:320,v:true}},'NW':{label:'Barat Laut',degree:315,azimuth:315,altitude:6,elongasi:11,setTime:'18:55',status:'TERLIHAT',desc:'Baik',color:'#4cb888',distMoon:'386,000 km',moonPos:{x:250,y:370,v:true}}};
+const dirOrder=['N','NE','E','SE','S','SW','W','NW'];
+let currentDirIndex=6,arActive=false,cameraStream=null,orientationHandler=null,autoRotateInterval=null;
+
+function shootDirection(dir){
+  const data=dirData[dir];const pos=data.moonPos;
+  document.querySelectorAll('.dir-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.dir-btn').forEach(b=>{if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(`'${dir}'`))b.classList.add('active');});
+  document.getElementById('compassNeedle').style.transform=`rotate(${data.degree}deg)`;
+  document.getElementById('compassDir').textContent=data.label.toUpperCase();
+  document.getElementById('compassDeg').textContent=data.degree+'°';
+  document.getElementById('bigDegree').textContent=data.degree+'°';
+  const moonGroup=document.getElementById('moonGroup');
+  moonGroup.setAttribute('transform',`translate(${pos.x}, ${pos.y})`);
+  document.getElementById('moonLabel').setAttribute('x',pos.x);document.getElementById('moonLabel').setAttribute('y',pos.y-40);
+  document.getElementById('moonLabel').textContent=pos.v?`HILAL · ${data.label.toUpperCase()}`:'TIDAK TERLIHAT';
+  document.getElementById('moonDistLabel').setAttribute('x',pos.x);document.getElementById('moonDistLabel').setAttribute('y',pos.y-25);
+  document.getElementById('moonDistLabel').textContent=pos.v?data.distMoon:'';
+  moonGroup.querySelectorAll('circle').forEach(c=>c.style.opacity=pos.v?'1':'0.2');
+  const altLine=document.getElementById('altLine');altLine.setAttribute('x1',pos.x);altLine.setAttribute('y1',pos.y);altLine.setAttribute('x2',pos.x);altLine.setAttribute('y2',380);
+  const altArc=document.getElementById('altArc');const arcR=Math.abs(380-pos.y);
+  if(arcR>10&&pos.v){altArc.setAttribute('d',`M ${pos.x} 380 A ${arcR} ${arcR} 0 0 1 ${pos.x+arcR*0.3} ${pos.y}`);altArc.style.opacity='0.6';}else{altArc.style.opacity='0';}
+  const altLabel=document.getElementById('altLabel');altLabel.setAttribute('x',pos.x+10);altLabel.setAttribute('y',(pos.y+380)/2);altLabel.textContent=pos.v?`Alt: ${data.altitude}°`:'';altLabel.style.opacity=pos.v?'1':'0';
+  const sunX=400;const azLine=document.getElementById('azLine');azLine.setAttribute('x1',sunX);azLine.setAttribute('y1',380);azLine.setAttribute('x2',pos.x);azLine.setAttribute('y2',380);
+  const azLabel=document.getElementById('azLabel');azLabel.setAttribute('x',(sunX+pos.x)/2);azLabel.setAttribute('y',372);azLabel.textContent=pos.v?`Az: ${data.azimuth}°`:'';azLabel.style.opacity=pos.v?'1':'0';
+  const elongLine=document.getElementById('elongLine');elongLine.setAttribute('x1',sunX);elongLine.setAttribute('y1',380);elongLine.setAttribute('x2',pos.x);elongLine.setAttribute('y2',pos.y);elongLine.style.opacity=pos.v?'1':'0.2';
+  const midX=(sunX+pos.x)/2,midY=(380+pos.y)/2;const elongLabel2=document.getElementById('elongLabel2');elongLabel2.setAttribute('x',midX-30);elongLabel2.setAttribute('y',midY);elongLabel2.textContent=pos.v?`Elong: ${data.elongasi}°`:'';elongLabel2.style.opacity=pos.v?'1':'0';
+  const distLabel=document.getElementById('distLabel');distLabel.setAttribute('x',midX-30);distLabel.setAttribute('y',midY+15);distLabel.textContent=pos.v?`Jarak: ${data.distMoon}`:'';distLabel.style.opacity=pos.v?'1':'0';
+  const moonShadow=document.getElementById('moonShadow');moonShadow.setAttribute('cx',pos.x);moonShadow.setAttribute('cy',380);moonShadow.style.opacity=pos.v?'0.7':'0';
+  document.getElementById('directionLabel').textContent=`→ ${data.label.toUpperCase()}`;
+  document.getElementById('dirValue').textContent=data.label;document.getElementById('azValue').textContent=data.azimuth+'°';document.getElementById('altValue').textContent=(data.altitude>0?data.altitude:'–')+'°';document.getElementById('elongValue').textContent=(data.elongasi>0?data.elongasi:'–')+'°';document.getElementById('setTime').textContent=data.setTime;document.getElementById('distMoon').textContent=data.distMoon;
+  document.getElementById('statusText').innerHTML=`<i class="fa-solid fa-${data.status.includes('TERLIHAT')?'check-circle':'times-circle'} mr-1"></i>STATUS: ${data.status}`;document.getElementById('statusText').style.color=data.color;document.getElementById('statusDetail').textContent=data.desc;
+}
+
+async function toggleAR(){if(arActive){stopAR();}else{await startAR();}}
+async function startAR(){
+  arActive=true;
+  document.getElementById('arToggleBtn').className='ar-toggle-btn ar-toggle-on';
+  document.getElementById('arToggleBtn').innerHTML='<i class="fa-solid fa-stop"></i><span>MATIKAN KAMERA & KOMPAS AR</span>';
+  document.getElementById('arStatusBox').className='ar-status-box active';
+  document.getElementById('arStatusBox').innerHTML='<i class="fa-solid fa-circle text-green-400 text-[6px] mr-1"></i> <strong>AKTIF</strong> — Kompas berjalan otomatis';
+  let cameraOK=false,sensorOK=false;
+  try{if(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia){const isHTTPS=location.protocol==='https:'||location.hostname==='localhost';if(isHTTPS){cameraStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'}});document.getElementById('cameraVideo').srcObject=cameraStream;document.getElementById('cameraVideo').classList.add('active');cameraOK=true;}}}catch(e){}
+  try{if(typeof DeviceOrientationEvent!=='undefined'){if(typeof DeviceOrientationEvent.requestPermission==='function'){const p=await DeviceOrientationEvent.requestPermission();if(p==='granted')sensorOK=true;}else{sensorOK=true;}}}catch(e){}
+  if(sensorOK&&(location.protocol==='https:'||location.hostname==='localhost')){
+    orientationHandler=(e)=>{let a=e.alpha;if(a===null&&e.webkitCompassHeading!==undefined)a=e.webkitCompassHeading;if(a===null)return;shootDirection(degreeToDirection(Math.round(a)));};
+    window.addEventListener('deviceorientation',orientationHandler,true);
+    document.getElementById('arStatusBox').innerHTML='<i class="fa-solid fa-circle text-green-400 text-[6px] mr-1"></i> <strong>AKTIF</strong> — Kompas mengikuti sensor device';
+  }else{
+    autoRotateInterval=setInterval(()=>{currentDirIndex=(currentDirIndex+1)%8;shootDirection(dirOrder[currentDirIndex]);},2500);
+    document.getElementById('arStatusBox').innerHTML='<i class="fa-solid fa-circle text-green-400 text-[6px] mr-1"></i> <strong>AKTIF</strong> — Kompas auto-rotate';
+  }
+}
+function stopAR(){
+  arActive=false;
+  if(cameraStream){cameraStream.getTracks().forEach(t=>t.stop());cameraStream=null;}
+  document.getElementById('cameraVideo').srcObject=null;document.getElementById('cameraVideo').classList.remove('active');
+  if(orientationHandler){window.removeEventListener('deviceorientation',orientationHandler,true);orientationHandler=null;}
+  if(autoRotateInterval){clearInterval(autoRotateInterval);autoRotateInterval=null;}
+  document.getElementById('arToggleBtn').className='ar-toggle-btn ar-toggle-off';
+  document.getElementById('arToggleBtn').innerHTML='<i class="fa-solid fa-camera"></i><span>AKTIFKAN KAMERA & KOMPAS AR</span>';
+  document.getElementById('arStatusBox').className='ar-status-box inactive';
+  document.getElementById('arStatusBox').innerHTML='<i class="fa-solid fa-circle-info mr-1"></i> Status: <strong>MATI</strong>';
+}
+function degreeToDirection(d){d=((d%360)+360)%360;if(d>=337.5||d<22.5)return'N';if(d>=22.5&&d<67.5)return'NE';if(d>=67.5&&d<112.5)return'E';if(d>=112.5&&d<157.5)return'SE';if(d>=157.5&&d<202.5)return'S';if(d>=202.5&&d<247.5)return'SW';if(d>=247.5&&d<292.5)return'W';return'NW';}
+
+// IMSAKIYAH
+const imsakiyahCities={'Jakarta':{offset:0,name:'Jakarta'},'Bandung':{offset:5,name:'Bandung'},'Surabaya':{offset:2,name:'Surabaya'},'Medan':{offset:-8,name:'Medan'},'Makassar':{offset:8,name:'Makassar'},'Semarang':{offset:3,name:'Semarang'},'Yogyakarta':{offset:4,name:'Yogyakarta'},'Palembang':{offset:-3,name:'Palembang'}};
+const ramadhanStart=new Date(2026,1,18);
+function selectCity(c){document.querySelectorAll('.city-btn').forEach(b=>b.classList.remove('active'));document.querySelectorAll('.city-btn').forEach(b=>{if(b.textContent===c)b.classList.add('active');});document.getElementById('imsakiyahSubtitle').textContent='Untuk Wilayah '+imsakiyahCities[c].name;renderImsakiyah(c);}
+function renderImsakiyah(c){const off=imsakiyahCities[c].offset;const dn=['Ahad','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];let h='';for(let i=0;i<30;i++){const d=new Date(ramadhanStart);d.setDate(d.getDate()+i);const dv=Math.floor(i/2);const sb=4*60+35+off+dv;const im=sb-10;const dz=12*60+5+off;const as=15*60+15+off+dv;const mg=18*60+15+off+dv;const is=mg+15;h+=`<tr><td class="day-num">${d.getDate()} ${monthNames[d.getMonth()].substring(0,3)}</td><td class="hijri-date">${i+1} Ramadhan</td><td>${dn[d.getDay()]}</td><td class="time-imsak">${fmt(im)}</td><td class="time-subuh">${fmt(sb)}</td><td class="time-dzuhur">${fmt(dz)}</td><td class="time-ashar">${fmt(as)}</td><td class="time-maghrib">${fmt(mg)}</td><td class="time-isya">${fmt(is)}</td></tr>`;}document.getElementById('imsakiyahBody').innerHTML=h;}
+function fmt(m){return String(Math.floor(m/60)).padStart(2,'0')+':'+String(m%60).padStart(2,'0');}
+
+// LIVE TV
+const liveChannels=[{name:'TVRI',title:'TVRI',desc:'TV Nasional',icon:'fa-tv'},{name:'RCTI',title:'RCTI',desc:'RCTI',icon:'fa-tv'},{name:'SCTV',title:'SCTV',desc:'SCTV',icon:'fa-tv'},{name:'Trans7',title:'Trans7',desc:'Trans7',icon:'fa-tv'},{name:'Liga 1',title:'BRI Liga 1',desc:'Indonesia',icon:'fa-futbol'},{name:'Champions',title:'UCL',desc:'Eropa',icon:'fa-trophy'}];
+const tvriEmbed='https://www.youtube.com/embed/live_stream?channel=UC4R8DWoMoI7CP2dU5Goj2zQ';
+document.getElementById('liveTVGrid').innerHTML=liveChannels.map(c=>`<div class="live-card" onclick="document.getElementById('mainPlayer').src='${tvriEmbed}'"><div class="live-card-thumb"><div class="live-badge">LIVE</div><i class="fa-solid ${c.icon} text-4xl text-yellow-400/70"></i></div><div class="live-card-info"><div class="live-channel-name">${c.name}</div><div class="font-bold text-sm">${c.title}</div><div class="text-[10px] text-slate-400">${c.desc}</div></div></div>`).join('');
+
+// KALENDER
+function renderHijriTabs(){document.getElementById('hijriTabs').innerHTML=hijriMonths.map((m,i)=>`<button class="px-4 py-2.5 rounded-xl font-semibold text-sm cursor-pointer ${i===activeHijriMonth?'text-slate-900':'text-slate-400'}" style="${i===activeHijriMonth?'background:linear-gradient(135deg,var(--gold),var(--gold-dark))':'background:var(--bg-card);border:1px solid var(--border)'}" onclick="selectHijriMonth(${i})"><span class="font-arabic ml-1">${m.arabic}</span> ${m.name}</button>`).join('');}
+function selectHijriMonth(i){activeHijriMonth=i;renderHijriTabs();renderHijriDetail();}
+function renderHijriDetail(){const m=hijriMonths[activeHijriMonth];let h=`<div class="grid md:grid-cols-3 gap-6 mb-6"><div><div class="font-arabic text-5xl gradient-gold">${m.arabic}</div><div class="text-2xl font-bold mt-1">${m.name}</div><div class="text-sm text-slate-400">${m.year} H</div></div><div class="md:col-span-2"><div class="text-sm text-slate-300">${m.desc}</div></div></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:8px;">${['Min','Sen','Sel','Rab','Kam','Jum','Sab'].map(d=>`<div class="text-center text-xs font-bold text-slate-400 py-2">${d}</div>`).join('')}</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;">`;for(let i=0;i<3;i++)h+=`<div style="aspect-ratio:1;"></div>`;for(let d=1;d<=m.days;d++){const evs=m.events.filter(e=>e.d===d);let cls='cal-day';if(evs.length>0)cls+=' '+evs[0].type;h+=`<div class="${cls}" title="${evs.map(e=>e.e).join(', ')}">${d}</div>`;}h+=`</div>`;document.getElementById('hijriDetail').innerHTML=h;}
+function renderMasehiTabs(){let h='';for(let i=0;i<12;i++)h+=`<button class="px-4 py-2.5 rounded-xl font-semibold text-sm cursor-pointer ${i===activeMasehiMonth?'text-white':'text-slate-400'}" style="${i===activeMasehiMonth?'background:linear-gradient(135deg,#ff6b6b,#c44545)':'background:var(--bg-card);border:1px solid var(--border)'}" onclick="selectMasehiMonth(${i})">${monthNames[i]}</button>`;document.getElementById('masehiTabs').innerHTML=h;}
+function selectMasehiMonth(i){activeMasehiMonth=i;renderMasehiTabs();renderMasehiDetail();}
+function renderMasehiDetail(){const m=getMasehiMonthData(CURRENT_YEAR,activeMasehiMonth);let h=`<div class="grid md:grid-cols-3 gap-6 mb-6"><div><div class="text-5xl font-black" style="background:linear-gradient(135deg,#ff6b6b,#c44545);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${m.name}</div><div class="text-sm text-slate-400 mt-1">Tahun ${m.year} M</div></div><div class="md:col-span-2"><div class="text-sm text-slate-300">Hari libur <strong class="text-red-300">${m.name} ${m.year}</strong>.</div></div></div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-bottom:8px;">${['Min','Sen','Sel','Rab','Kam','Jum','Sab'].map(d=>`<div class="text-center text-xs font-bold text-slate-400 py-2">${d}</div>`).join('')}</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:8px;">`;for(let i=0;i<m.startDay;i++)h+=`<div style="aspect-ratio:1;"></div>`;for(let d=1;d<=m.days;d++)h+=`<div class="cal-day">${d}</div>`;h+=`</div>`;document.getElementById('masehiDetail').innerHTML=h;}
+
+// PUASA & HARI NASIONAL
+const sunnahData=[{t:'Senin & Kamis',i:'fa-calendar-day',c:'#4cb888',d:'Rutin.'},{t:'Puasa Arafah',i:'fa-mountain',c:'#d4af37',d:'9 Zulhijjah.'},{t:'Puasa Asyura',i:'fa-star',c:'#e8923c',d:'10 Muharram.'},{t:'Puasa 6 Syawal',i:'fa-star-of-life',c:'#d4af37',d:'Setara setahun.'},{t:'Ayyamul Bidh',i:'fa-circle',c:'#4cb888',d:'13-15 bulan.'}];
+const haramData=[{t:'Idul Fitri',i:'fa-star',d:'1 Syawal.'},{t:'Idul Adha',i:'fa-cow',d:'10 Zulhijjah.'},{t:'Hari Tasrik',i:'fa-triangle-exclamation',d:'11-13 Zulhijjah.'}];
+document.getElementById('sunnahFasts').innerHTML=sunnahData.map(f=>`<div class="card p-5"><div class="flex items-center gap-3 mb-3"><div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(212,175,55,0.1);border:1px solid rgba(212,175,55,0.2)"><i class="fa-solid ${f.i}" style="color:${f.c}"></i></div><div class="font-bold text-sm">${f.t}</div></div><p class="text-xs text-slate-400">${f.d}</p></div>`).join('');
+document.getElementById('haramFasts').innerHTML=haramData.map(f=>`<div class="card p-5"><div class="flex items-center gap-3 mb-3"><div class="w-11 h-11 rounded-xl flex items-center justify-center" style="background:rgba(196,69,69,0.1);border:1px solid rgba(196,69,69,0.2)"><i class="fa-solid ${f.i} text-red-400"></i></div><div class="font-bold text-sm">${f.t}</div></div><p class="text-xs text-slate-400">${f.d}</p></div>`).join('');
+const nationalDays=[{d:'17 Agustus',t:'HUT Kemerdekaan',i:'fa-flag',c:'#ff6b6b'},{d:'1 Juni',t:'Hari Pancasila',i:'fa-scale-balanced',c:'#d4af37'},{d:'22 Desember',t:'Hari Ibu',i:'fa-heart',c:'#e8923c'},{d:'9 Desember',t:'Hari Anti-Korupsi',i:'fa-gavel',c:'#ff6b6b'}];
+document.getElementById('nationalDays').innerHTML=nationalDays.map(d=>`<div class="card p-5 flex items-start gap-4"><div class="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(212,175,55,0.08);border:1px solid var(--border)"><i class="fa-solid ${d.i}" style="color:${d.c}"></i></div><div><div class="text-xs font-bold uppercase tracking-wider mb-1" style="color:${d.c}">${d.d}</div><div class="font-bold text-sm">${d.t}</div></div></div>`).join('');
+
+function openPrintCalendar(type){const isHijri=type==='hijri';const title=isHijri?'Kalender Hijriah':'Kalender Masehi '+CURRENT_YEAR;document.getElementById('modalTitle').textContent='Pratinjau '+title;let html='<div style="text-align:center;padding:15px 0 20px;border-bottom:3px solid #d4af37;margin-bottom:25px;"><h2 style="font-size:28px;font-weight:800;color:#1a1a1a;margin:0;">'+title+'</h2></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:20px;">';for(let i=0;i<12;i++){const m=isHijri?hijriMonths[i]:getMasehiMonthData(CURRENT_YEAR,i);html+='<div style="background:#fff;border:1px solid #e0e0e0;border-radius:10px;overflow:hidden;"><div style="text-align:center;font-weight:800;font-size:14px;padding:10px 4px;color:#fff;background:linear-gradient(135deg,#d4af37,#a8851f);">'+(isHijri?'<span style="font-family:Amiri,serif;font-size:16px">'+m.arabic+'</span><br>':'')+m.name+'</div><div style="display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:8px;background:#fafafa;">';['M','S','S','R','K','J','S'].forEach(d=>{html+='<div style="text-align:center;font-size:9px;font-weight:700;padding:3px 0;color:#555;background:#eee;border-radius:3px;">'+d+'</div>';});const sd=isHijri?((i*3)%7):m.startDay;for(let j=0;j<sd;j++)html+='<div style="padding:6px 0;"></div>';for(let d=1;d<=m.days;d++)html+='<div style="text-align:center;font-size:11px;padding:6px 0;background:#fff;border-radius:4px;">'+d+'</div>';html+='</div></div>';}html+='</div>';document.getElementById('modalBody').innerHTML=html;document.getElementById('printModal').classList.add('active');}
+
+// NETWORK
+async function testNetworkSpeed(){if(!navigator.onLine){document.getElementById('netDot').className='net-dot red';document.getElementById('netStatus').textContent='Offline';document.getElementById('netSpeed').textContent='0 KB/s';return;}const s=performance.now();try{const r=await fetch('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/webfonts/fa-solid-900.woff2?t='+Date.now(),{cache:'no-store',mode:'cors'});const b=await r.blob();const d=(performance.now()-s)/1000;const sp=b.size/d;let st='stable';if(sp<50000)st='unstable';const dt=document.getElementById('netDot'),s1=document.getElementById('netStatus'),sp1=document.getElementById('netSpeed');if(st==='stable'){dt.className='net-dot green';s1.textContent='Stabil';s1.className='text-[11px] font-bold text-green-400';}else{dt.className='net-dot yellow';s1.textContent='Kurang Stabil';s1.className='text-[11px] font-bold text-yellow-400';}sp1.textContent=sp>=1048576?(sp/1048576).toFixed(1)+' MB/s':sp>=1024?Math.round(sp/1024)+' KB/s':Math.round(sp)+' B/s';}catch(e){document.getElementById('netDot').className='net-dot yellow';document.getElementById('netStatus').textContent='Kurang Stabil';}}
+window.addEventListener('online',testNetworkSpeed);window.addEventListener('offline',testNetworkSpeed);setInterval(testNetworkSpeed,15000);
+
+function updateClock(){const n=new Date();document.getElementById('currentTime').textContent=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;document.getElementById('currentDate').textContent=`${days[n.getDay()]}, ${n.getDate()} ${monthNames[n.getMonth()]} ${n.getFullYear()}`;}
+setInterval(updateClock,1000);
+
+function createStars(){const c=document.getElementById('stars');for(let i=0;i<80;i++){const s=document.createElement('div');s.className='star';const sz=Math.random()*2+0.5;s.style.width=sz+'px';s.style.height=sz+'px';s.style.left=Math.random()*100+'%';s.style.top=Math.random()*100+'%';s.style.animationDelay=Math.random()*3+'s';c.appendChild(s);}}
+createStars();
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// INIT
+renderDoa();
+renderPanduanPuasa();
+renderHijriTabs();renderHijriDetail();renderMasehiTabs();renderMasehiDetail();
+updateClock();testNetworkSpeed();shootDirection('W');renderImsakiyah('Jakarta');
+calcFitrah();
+</script>
+</body>
+</html>
